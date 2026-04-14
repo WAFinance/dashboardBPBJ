@@ -45,8 +45,8 @@ html,body{width:100%;min-height:100vh;background:var(--bg);color:var(--text);fon
 .header::after{content:'';position:absolute;right:-60px;top:-30px;width:200px;height:200px;background:rgba(255,255,255,0.05);border-radius:50%;}
 .header::before{content:'';position:absolute;right:80px;bottom:-50px;width:150px;height:150px;background:rgba(255,255,255,0.04);border-radius:50%;}
 .header-left{display:flex;align-items:center;gap:12px;z-index:1}
-.logo-img{height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3))}
-.logo-bpbj{height:44px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3))}
+.logo-img{height:52px;width:auto;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.2))}
+.logo-bpbj{height:44px;width:auto;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.2))}
 .divider-v{width:1px;height:44px;background:rgba(255,255,255,0.25);flex-shrink:0}
 .header-title h1{font-size:16px;font-weight:700;color:#fff;line-height:1.3}
 .header-title p{font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px}
@@ -466,27 +466,41 @@ html,body{width:100%;min-height:100vh;background:var(--bg);color:var(--text);fon
 
   <!-- ══ TAB REALISASI ══ -->
   <div id="tab-real" class="tab-content">
-    <div class="kpi-row">
+    <div class="kpi-row" style="grid-template-columns:repeat(6,minmax(0,1fr))">
       <div class="kpi kpi-blue" onclick="showModal('real-pagu')">
         <div class="kpi-stripe"></div>
         <div class="kpi-top"><div class="kpi-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg></div></div>
-        <div class="kpi-label">Pagu RUP</div>
+        <div class="kpi-label">Pagu Anggaran</div>
         <div class="kpi-value" id="rk-pagu">—</div>
         <div class="kpi-sub" id="rk-paket">— paket</div>
       </div>
       <div class="kpi kpi-green" onclick="showModal('real-realisasi')">
         <div class="kpi-stripe"></div>
         <div class="kpi-top"><div class="kpi-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" opacity=".3"/><circle cx="12" cy="12" r="5" opacity=".5"/><circle cx="12" cy="12" r="2"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".4"/></svg></div><div class="kpi-trend" id="rk-badge" style="background:var(--green-light);color:var(--green)">—</div></div>
-        <div class="kpi-label">Total Realisasi</div>
+        <div class="kpi-label">Realisasi Kontrak</div>
         <div class="kpi-value" id="rk-real">—</div>
         <div class="kpi-sub" id="rk-pct">— terealisasi</div>
+      </div>
+      <div class="kpi kpi-teal" onclick="showModal('real-paket')">
+        <div class="kpi-stripe"></div>
+        <div class="kpi-top"><div class="kpi-icon-wrap"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div></div>
+        <div class="kpi-label">Jumlah Paket</div>
+        <div class="kpi-value" id="rk-jml-paket">—</div>
+        <div class="kpi-sub" id="rk-sisa-paket">— sisa paket</div>
       </div>
       <div class="kpi kpi-amber" onclick="showModal('real-pdn')">
         <div class="kpi-stripe"></div>
         <div class="kpi-top"><div class="kpi-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 19V10l4-3v3l4-3v3l4-3v12H4z"/><path d="M4 19h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><rect x="9" y="14" width="3" height="5" rx="0.5" fill="#fff" opacity=".6"/><rect x="13" y="12" width="3" height="7" rx="0.5" fill="#fff" opacity=".4"/></svg></div></div>
-        <div class="kpi-label">Realisasi PDN</div>
-        <div class="kpi-value" id="rk-pdn">—</div>
-        <div class="kpi-sub" id="rk-pdn-pct">— dari realisasi</div>
+        <div class="kpi-label">Pagu HPS</div>
+        <div class="kpi-value" id="rk-hps">—</div>
+        <div class="kpi-sub" id="rk-pdn-pct">— dari pagu</div>
+      </div>
+      <div class="kpi kpi-purple" onclick="showModal('real-efisiensi')">
+        <div class="kpi-stripe"></div>
+        <div class="kpi-top"><div class="kpi-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" opacity=".8"/></svg></div></div>
+        <div class="kpi-label">Efisiensi</div>
+        <div class="kpi-value" id="rk-efisiensi">—</div>
+        <div class="kpi-sub" id="rk-efisiensi-pct">— dari pagu</div>
       </div>
       <div class="kpi kpi-teal" onclick="showModal('real-penyedia')">
         <div class="kpi-stripe"></div>
@@ -500,38 +514,48 @@ html,body{width:100%;min-height:100vh;background:var(--bg);color:var(--text);fon
     <div class="status-grid">
       <div class="status-card" onclick="showModal('status-tender')">
         <div class="status-head"><div class="status-icon" style="background:var(--primary-light)"><svg viewBox="0 0 24 24" style="fill:var(--primary)"><path d="M9 3L5 7l2 2-4 4 2 2 4-4 2 2 4-4L9 3z"/><path d="M5 19h14" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div><div class="status-name">Tender / Seleksi</div><div class="status-type" style="color:var(--primary)">Kompetitif</div></div></div>
-        <div class="status-big" id="rs-tender-selesai">—</div>
-        <div class="status-big-lbl">Paket Selesai</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px">
+          <div class="status-big" id="rs-tender-selesai">—</div>
+          <div style="font-size:13px;color:var(--text3);font-weight:600">/ <span id="rs-tender-total-rup">—</span> paket RUP</div>
+        </div>
+        <div class="status-big-lbl">Paket Selesai · Berjalan: <strong id="rs-tender-berjalan" style="color:var(--amber)">—</strong></div>
         <div class="status-kv-grid">
-          <div class="status-kv"><span>Sisa Paket</span><strong id="rs-tender-sisa">—</strong></div>
-          <div class="status-kv"><span>Pagu Anggaran</span><strong id="rs-tender-pagu">—</strong></div>
+          <div class="status-kv"><span>Sisa Paket (RUP − Real)</span><strong id="rs-tender-sisa">—</strong></div>
+          <div class="status-kv"><span>Pagu Anggaran (RUP)</span><strong id="rs-tender-pagu">—</strong></div>
           <div class="status-kv"><span>Pagu HPS</span><strong id="rs-tender-hps">—</strong></div>
-          <div class="status-kv"><span>Nilai Kontrak</span><strong id="rs-tender-kontrak">—</strong></div>
-          <div class="status-kv" style="grid-column:1/-1"><span>Efisiensi (Pagu − Kontrak)</span><strong id="rs-tender-efisiensi" style="color:var(--green)">—</strong></div>
+          <div class="status-kv"><span>Realisasi Nilai Kontrak</span><strong id="rs-tender-kontrak">—</strong></div>
+          <div class="status-kv" style="grid-column:1/-1"><span>Efisiensi (Pagu RUP − Realisasi)</span><strong id="rs-tender-efisiensi" style="color:var(--green)">—</strong></div>
         </div>
       </div>
       <div class="status-card" onclick="showModal('status-ep')">
         <div class="status-head"><div class="status-icon" style="background:var(--purple-light)"><svg viewBox="0 0 24 24" style="fill:var(--purple)"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zm1 4h10M9 10a3 3 0 0 0 6 0"/></svg></div><div><div class="status-name">E-Purchasing</div><div class="status-type" style="color:var(--purple)">Katalog Elektronik</div></div></div>
-        <div class="status-big" id="rs-ep-selesai">—</div>
-        <div class="status-big-lbl">Paket Selesai</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px">
+          <div class="status-big" id="rs-ep-selesai">—</div>
+          <div style="font-size:13px;color:var(--text3);font-weight:600">/ <span id="rs-ep-total-rup">—</span> paket RUP</div>
+        </div>
+        <div class="status-big-lbl">Paket Selesai · Berjalan: <strong id="rs-ep-berjalan" style="color:var(--amber)">—</strong></div>
+        <div id="rs-ep-status-breakdown" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
         <div class="status-kv-grid">
-          <div class="status-kv"><span>Sisa Paket</span><strong id="rs-ep-sisa">—</strong></div>
-          <div class="status-kv"><span>Pagu Anggaran</span><strong id="rs-ep-pagu">—</strong></div>
+          <div class="status-kv"><span>Sisa Paket (RUP − Real)</span><strong id="rs-ep-sisa">—</strong></div>
+          <div class="status-kv"><span>Pagu Anggaran (RUP)</span><strong id="rs-ep-pagu">—</strong></div>
           <div class="status-kv"><span>Pagu HPS</span><strong id="rs-ep-hps">—</strong></div>
-          <div class="status-kv"><span>Nilai Kontrak</span><strong id="rs-ep-kontrak">—</strong></div>
-          <div class="status-kv" style="grid-column:1/-1"><span>Efisiensi (Pagu − Kontrak)</span><strong id="rs-ep-efisiensi" style="color:var(--green)">—</strong></div>
+          <div class="status-kv"><span>Realisasi Nilai Kontrak</span><strong id="rs-ep-kontrak">—</strong></div>
+          <div class="status-kv" style="grid-column:1/-1"><span>Efisiensi (Pagu RUP − Realisasi)</span><strong id="rs-ep-efisiensi" style="color:var(--green)">—</strong></div>
         </div>
       </div>
       <div class="status-card" onclick="showModal('status-pl')">
         <div class="status-head"><div class="status-icon" style="background:var(--green-light)"><svg viewBox="0 0 24 24" style="fill:var(--green)"><path d="M11 14H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7l3 3v7z" opacity=".5"/><path d="M13 6h7a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-7"/><path d="M9 17l2 3 4-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><div><div class="status-name">Pengadaan Langsung</div><div class="status-type" style="color:var(--green)">Penunjukan Langsung</div></div></div>
-        <div class="status-big" id="rs-pl-selesai">—</div>
-        <div class="status-big-lbl">Paket Selesai</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px">
+          <div class="status-big" id="rs-pl-selesai">—</div>
+          <div style="font-size:13px;color:var(--text3);font-weight:600">/ <span id="rs-pl-total-rup">—</span> paket RUP</div>
+        </div>
+        <div class="status-big-lbl">Paket Selesai · Berjalan: <strong id="rs-pl-berjalan" style="color:var(--amber)">—</strong></div>
         <div class="status-kv-grid">
-          <div class="status-kv"><span>Sisa Paket</span><strong id="rs-pl-sisa">—</strong></div>
-          <div class="status-kv"><span>Pagu Anggaran</span><strong id="rs-pl-pagu">—</strong></div>
+          <div class="status-kv"><span>Sisa Paket (RUP − Real)</span><strong id="rs-pl-sisa">—</strong></div>
+          <div class="status-kv"><span>Pagu Anggaran (RUP)</span><strong id="rs-pl-pagu">—</strong></div>
           <div class="status-kv"><span>Pagu HPS</span><strong id="rs-pl-hps">—</strong></div>
-          <div class="status-kv"><span>Nilai Kontrak</span><strong id="rs-pl-kontrak">—</strong></div>
-          <div class="status-kv" style="grid-column:1/-1"><span>Efisiensi (Pagu − Kontrak)</span><strong id="rs-pl-efisiensi" style="color:var(--green)">—</strong></div>
+          <div class="status-kv"><span>Realisasi Nilai Kontrak</span><strong id="rs-pl-kontrak">—</strong></div>
+          <div class="status-kv" style="grid-column:1/-1"><span>Efisiensi (Pagu RUP − Realisasi)</span><strong id="rs-pl-efisiensi" style="color:var(--green)">—</strong></div>
         </div>
       </div>
     </div>
@@ -556,8 +580,15 @@ html,body{width:100%;min-height:100vh;background:var(--bg);color:var(--text);fon
 
     <div class="row2">
       <div class="card" onclick="showModal('chart-pagu-real')">
-        <div class="card-header"><div class="card-title"><div class="card-title-dot"></div>Pagu vs Realisasi per Metode (Rp Miliar)</div></div>
-        <div style="position:relative;height:220px"><canvas id="cPaguReal"></canvas></div>
+        <div class="card-header">
+          <div class="card-title"><div class="card-title-dot"></div>Pagu vs Realisasi + Efisiensi HPS per Metode</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:11px">
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#2e7d32;display:inline-block"></span>Realisasi Kontrak</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#66bb6a;display:inline-block"></span>Efisiensi (HPS−Kontrak)</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(21,101,192,0.18);border:1px solid #90caf9;display:inline-block"></span>Sisa Pagu</span>
+          </div>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="cPaguReal"></canvas></div>
       </div>
       <div class="card" onclick="showModal('chart-satker')">
         <div class="card-header"><div class="card-title"><div class="card-title-dot" style="background:var(--teal)"></div>Top 8 Satuan Kerja (Nilai Realisasi)</div></div>
@@ -632,7 +663,7 @@ html,body{width:100%;min-height:100vh;background:var(--bg);color:var(--text);fon
   <div class="present-footer">
     <div class="present-dots" id="presentDots"></div>
     <div class="present-progress"><div class="present-progress-fill" id="presentProgressFill" style="width:0%"></div></div>
-    <div class="present-slide-label" id="presentSlideLabel">Slide 1 / 6</div>
+    <div class="present-slide-label" id="presentSlideLabel">Slide 1 / 8</div>
   </div>
 </div>
 
@@ -788,44 +819,102 @@ function renderRUP(rup){
 
 // ─────────────────────── RENDER REALISASI ───────────────────────
 function renderReal(rup,real){
+  // KPI summary — Total Paket & Pagu dari RUP; Sisa = RUP − Realisasi; Efisiensi = Pagu RUP − Kontrak
   var totalPaguRUP=sum(rup,'Total Nilai (Rp)');
-  var totalReal=sum(real,'Total Nilai (Rp)');
+  var totalPaketRUP=rup.length;
+  // Kontrak: ambil dari kolom Nilai Kontrak di realisasi; fallback ke Total Nilai
+  var totalKontrak=sum(real,'Nilai Kontrak (Rp)')||sum(real,'Nilai Kontrak')||sum(real,'Total Nilai (Rp)');
+  var totalHPS=sum(real,'Nilai HPS (Rp)')||sum(real,'Pagu HPS')||(totalPaguRUP*0.98);
   var totalPDN=sum(real,'Nilai PDN (Rp)');
   var penyedia=new Set(real.map(r=>r['Nama Penyedia']).filter(Boolean)).size;
-  var pct=totalPaguRUP?(totalReal/totalPaguRUP*100):0;
+  // Paket selesai di realisasi
+  var selesaiPaket=real.filter(r=>{var s=(r['Status Paket']||'').toLowerCase();return s.includes('selesai')||s.includes('kontrak')||s.includes('terima')||s.includes('done')||s.includes('complete');}).length;
+  // Sisa = Total RUP − Total masuk Realisasi
+  var sisaPaket=Math.max(totalPaketRUP-real.length,0);
+  // Efisiensi = Pagu RUP − Realisasi Kontrak (bukan estimasi)
+  var efisiensi=Math.max(totalPaguRUP-totalKontrak,0);
+  var efisiensiPct=totalPaguRUP?(efisiensi/totalPaguRUP*100):0;
+  var pct=totalPaguRUP?(totalKontrak/totalPaguRUP*100):0;
   document.getElementById('rk-pagu').textContent=fmt(totalPaguRUP);
-  document.getElementById('rk-paket').textContent=real.length.toLocaleString('id-ID')+' paket';
-  document.getElementById('rk-real').textContent=fmt(totalReal);
-  document.getElementById('rk-pct').textContent=pct.toFixed(1)+'% dari total pagu';
+  document.getElementById('rk-paket').textContent=totalPaketRUP.toLocaleString('id-ID')+' paket RUP';
+  document.getElementById('rk-real').textContent=fmt(totalKontrak);
+  document.getElementById('rk-pct').textContent=pct.toFixed(1)+'% dari pagu';
   var badge=document.getElementById('rk-badge');
   badge.textContent=pct.toFixed(1)+'%';
   if(pct>=80){badge.style.background='var(--green-light)';badge.style.color='var(--green)';}
   else if(pct>=50){badge.style.background='var(--amber-light)';badge.style.color='var(--amber)';}
   else{badge.style.background='var(--red-light)';badge.style.color='var(--red)';}
-  document.getElementById('rk-pdn').textContent=fmt(totalPDN);
-  document.getElementById('rk-pdn-pct').textContent=totalReal?(totalPDN/totalReal*100).toFixed(1)+'% dari realisasi':'';
+  document.getElementById('rk-jml-paket').textContent=selesaiPaket.toLocaleString('id-ID')+' selesai';
+  document.getElementById('rk-sisa-paket').textContent=sisaPaket.toLocaleString('id-ID')+' sisa (RUP−Real)';
+  document.getElementById('rk-hps').textContent=fmt(totalHPS);
+  document.getElementById('rk-pdn-pct').textContent=totalPaguRUP?(totalHPS/totalPaguRUP*100).toFixed(1)+'% dari pagu':'';
+  document.getElementById('rk-efisiensi').textContent=fmt(efisiensi);
+  document.getElementById('rk-efisiensi-pct').textContent=efisiensiPct.toFixed(1)+'% dari pagu';
   document.getElementById('rk-penyedia').textContent=penyedia.toLocaleString('id-ID');
 
   // ── status cards per metode ──
+  // Fix: Total Paket & Pagu dari RUP; Sisa = RUP − Realisasi; Efisiensi = Pagu RUP − Realisasi Kontrak
   var sc=function(prefix,kws){
-    var rows=real.filter(r=>kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
-    var selesai=rows.filter(r=>{var s=(r['Status Paket']||'').toLowerCase();return s.includes('selesai')||s.includes('kontrak')||s.includes('terima');}).length;
-    var totalPkt=rows.length;
-    var sisa=totalPkt-selesai;
-    var pagu=sum(rows,'Total Nilai (Rp)');
-    var kontrak=sum(rows,'Nilai Kontrak (Rp)')||sum(rows,'Nilai Kontrak')||(pagu*0.95);
-    var hps=sum(rows,'Nilai HPS (Rp)')||sum(rows,'Pagu HPS')||(pagu*0.98);
-    var efisiensi=Math.max(pagu-kontrak,0);
+    // RUP rows: patokan total paket & pagu anggaran
+    var rupRows=rup.filter(r=>kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
+    // Realisasi rows: semua yang masuk realisasi (berjalan maupun selesai)
+    var realRows=real.filter(r=>kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
+
+    // Total paket & pagu dari RUP
+    var totalRUP=rupRows.length;
+    var paguRUP=sum(rupRows,'Total Nilai (Rp)');
+
+    // Paket selesai = status di realisasi yang sudah selesai/kontrak/terima
+    var selesai=realRows.filter(r=>{
+      var s=(r['Status Paket']||'').toLowerCase();
+      return s.includes('selesai')||s.includes('kontrak')||s.includes('terima')||s.includes('done')||s.includes('complete');
+    }).length;
+    // Berjalan = masuk realisasi tapi belum selesai
+    var berjalan=realRows.length-selesai;
+    // Sisa = belum masuk realisasi sama sekali (di RUP tapi tidak ada di realisasi)
+    var masukReal=realRows.length;
+    var sisa=Math.max(totalRUP-masukReal,0);
+
+    // Nilai kontrak dari realisasi (actual), fallback ke realisasi nilai
+    var kontrak=sum(realRows,'Nilai Kontrak (Rp)')||sum(realRows,'Nilai Kontrak')||sum(realRows,'Total Nilai (Rp)');
+    // HPS dari realisasi, fallback ke 98% pagu
+    var hps=sum(realRows,'Nilai HPS (Rp)')||sum(realRows,'Pagu HPS')||(paguRUP*0.98);
+    // Efisiensi = Pagu RUP − Realisasi Kontrak (bukan pagu*0.95)
+    var efisiensi=Math.max(paguRUP-kontrak,0);
+
     document.getElementById('rs-'+prefix+'-selesai').textContent=selesai.toLocaleString('id-ID');
-    document.getElementById('rs-'+prefix+'-sisa').textContent=sisa.toLocaleString('id-ID');
-    document.getElementById('rs-'+prefix+'-pagu').textContent=fmt(pagu);
+    document.getElementById('rs-'+prefix+'-total-rup').textContent=totalRUP.toLocaleString('id-ID');
+    document.getElementById('rs-'+prefix+'-berjalan').textContent=berjalan.toLocaleString('id-ID')+' berjalan';
+    document.getElementById('rs-'+prefix+'-sisa').textContent=sisa.toLocaleString('id-ID')+' paket';
+    document.getElementById('rs-'+prefix+'-pagu').textContent=fmt(paguRUP);
     document.getElementById('rs-'+prefix+'-hps').textContent=fmt(hps);
     document.getElementById('rs-'+prefix+'-kontrak').textContent=fmt(kontrak);
     document.getElementById('rs-'+prefix+'-efisiensi').textContent=fmt(efisiensi);
+
+    // Khusus E-Purchasing: tampilkan breakdown semua status
+    if(prefix==='ep'){
+      var statusMap={};
+      realRows.forEach(function(r){
+        var s=r['Status Paket']||'Tidak Ada Status';
+        statusMap[s]=(statusMap[s]||0)+1;
+      });
+      var statusColors={
+        'Paket Selesai':'#2e7d32','Selesai':'#2e7d32','selesai':'#2e7d32',
+        'Sedang Berjalan':'#1565c0','Berjalan':'#1565c0','berjalan':'#1565c0',
+        'Proses':'#e65100','Menunggu':'#6a1b9a',
+      };
+      var breakdownEl=document.getElementById('rs-ep-status-breakdown');
+      if(breakdownEl){
+        breakdownEl.innerHTML=Object.entries(statusMap).sort((a,b)=>b[1]-a[1]).map(function([s,n]){
+          var c=statusColors[s]||'#546e7a';
+          return '<span style="background:'+c+'18;color:'+c+';border:1px solid '+c+'44;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px">'+s+': '+n.toLocaleString('id-ID')+'</span>';
+        }).join('');
+      }
+    }
   };
   sc('tender',['tender','seleksi']);
-  sc('ep',['e-purch','epurch','purchasing']);
-  sc('pl',['langsung']);
+  sc('ep',['e-purch','epurch','purchasing','e-katalog','katalog']);
+  sc('pl',['langsung','penunjukan']);
 
   // ── stacked progress bars (Realisasi vs Sisa Pagu) ──
   var rupM=gSum(rup,'Metode Pengadaan','Total Nilai (Rp)');
@@ -863,10 +952,46 @@ function renderReal(rup,real){
   var status=gCount(real,'Status Paket');
   document.getElementById('dc-status').textContent=real.length.toLocaleString('id-ID');
   mkPie('cStatus',Object.keys(status),Object.values(status),'lStatus','dc-status');
-  mkBar('cPaguReal',allM,[
-    {label:'Pagu',data:allM.map(m=>+((rupM[m]||0)/1e9).toFixed(1)),backgroundColor:'rgba(21,101,192,0.25)',borderRadius:6,borderSkipped:false},
-    {label:'Realisasi',data:allM.map(m=>+((realM[m]||0)/1e9).toFixed(1)),backgroundColor:'#2e7d32',borderRadius:6,borderSkipped:false},
-  ],{legend:true,xfmt:v=>v+'M'});
+
+  // Stacked bar: Realisasi Kontrak + Efisiensi HPS + Sisa Pagu
+  var hpsM=gSum(real,'Nilai HPS (Rp)')||gSum(real,'Pagu HPS');
+  // fallback: use 98% of pagu per metode
+  var kontrakM={}; allM.forEach(m=>{
+    var rows=real.filter(r=>r['Metode Pengadaan']===m);
+    kontrakM[m]=sum(rows,'Nilai Kontrak (Rp)')||sum(rows,'Nilai Kontrak')||sum(rows,'Total Nilai (Rp)');
+  });
+  var hpsPerM={}; allM.forEach(m=>{
+    var rows=real.filter(r=>r['Metode Pengadaan']===m);
+    hpsPerM[m]=sum(rows,'Nilai HPS (Rp)')||sum(rows,'Pagu HPS')||((rupM[m]||0)*0.98);
+  });
+  var dataKontrak=allM.map(m=>+((kontrakM[m]||0)/1e9).toFixed(1));
+  var dataEfis=allM.map(m=>+(Math.max((hpsPerM[m]||0)-(kontrakM[m]||0),0)/1e9).toFixed(1));
+  var dataSisa=allM.map(m=>+(Math.max((rupM[m]||0)-(hpsPerM[m]||0),0)/1e9).toFixed(1));
+  if(charts['cPaguReal']){charts['cPaguReal'].destroy();delete charts['cPaguReal'];}
+  var elPR=document.getElementById('cPaguReal');
+  if(elPR){
+    charts['cPaguReal']=new Chart(elPR,{
+      type:'bar',
+      data:{
+        labels:allM.map(m=>m.length>18?m.substring(0,16)+'…':m),
+        datasets:[
+          {label:'Realisasi Kontrak',data:dataKontrak,backgroundColor:'#2e7d32',borderRadius:4,stack:'s'},
+          {label:'Efisiensi (HPS−Kontrak)',data:dataEfis,backgroundColor:'#a5d6a7',borderRadius:0,stack:'s'},
+          {label:'Sisa Pagu',data:dataSisa,backgroundColor:'rgba(21,101,192,0.15)',borderRadius:0,stack:'s'},
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        scales:{
+          x:{stacked:true,ticks:{font:{size:10}},grid:{display:false}},
+          y:{stacked:true,ticks:{callback:v=>v+'M',font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}
+        },
+        plugins:{
+          legend:{display:false},
+          tooltip:{callbacks:{label:i=>' '+i.dataset.label+': Rp '+i.raw+'M'}}
+        }
+      }
+    });
+  }
 
   var satker=gSum(real,'Nama Satuan Kerja','Total Nilai (Rp)');
   var top8=Object.entries(satker).sort((a,b)=>b[1]-a[1]).slice(0,8);
@@ -896,7 +1021,9 @@ var modalConfigs={
   'chart-pagu-metode':{title:'Nilai Pagu per Metode — Detail',sub:'Rincian nilai pagu per metode pengadaan',fn:modalChartPaguMetode},
   'chart-sumber':{title:'Sumber Dana — Detail',sub:'Distribusi anggaran berdasarkan sumber dana',fn:modalChartSumber},
   'real-pagu':{title:'Detail Pagu RUP (Realisasi)',sub:'Ringkasan pagu untuk konteks realisasi',fn:modalRealPagu},
-  'real-realisasi':{title:'Detail Realisasi Pengadaan',sub:'Rincian capaian realisasi',fn:modalRealReal},
+  'real-realisasi':{title:'Detail Realisasi Pengadaan',sub:'Rincian capaian realisasi kontrak',fn:modalRealReal},
+  'real-paket':{title:'Detail Jumlah Paket',sub:'Rincian paket selesai dan sisa per metode',fn:()=>modalStatusDetail('all',['tender','seleksi','langsung','purch','purchasing','epurch','e-purch'])},
+  'real-efisiensi':{title:'Detail Efisiensi Pengadaan',sub:'Selisih Pagu − Nilai Kontrak per metode',fn:modalRealEfisiensi},
   'real-pdn':{title:'Detail Realisasi PDN',sub:'Produk Dalam Negeri dalam realisasi',fn:modalRealPDN},
   'real-penyedia':{title:'Detail Penyedia',sub:'Daftar penyedia aktif dalam realisasi',fn:modalRealPenyedia},
   'status-tender':{title:'Status Tender / Seleksi',sub:'Detail paket tender dan seleksi',fn:()=>modalStatusDetail('tender',['tender','seleksi'])},
@@ -985,10 +1112,41 @@ function modalRealPenyedia(){
   return modalKpiRow([{label:'Penyedia Unik',value:Object.keys(byPenyedia).length.toLocaleString('id-ID')},{label:'Total Nilai',value:fmt(total)},{label:'Rata-rata per Penyedia',value:fmt(Object.keys(byPenyedia).length?total/Object.keys(byPenyedia).length:0)}])+'<div class="modal-section-title">Top 20 Penyedia (Nilai Realisasi)</div><table class="modal-table"><thead><tr><th>#</th><th>Nama Penyedia</th><th>Nilai</th><th>%</th></tr></thead><tbody>'+sorted.map(([k,v],i)=>'<tr><td>'+(i+1)+'</td><td>'+k+'</td><td>'+fmt(v)+'</td><td>'+(total?(v/total*100).toFixed(1)+'%':'—')+'</td></tr>').join('')+'</tbody></table>';
 }
 
+function modalRealEfisiensi(){
+  var methods=[
+    {label:'Tender / Seleksi',   kws:['tender','seleksi']},
+    {label:'E-Purchasing',       kws:['e-purch','epurch','purchasing','e-katalog','katalog']},
+    {label:'Pengadaan Langsung', kws:['langsung','penunjukan']},
+  ];
+  var totalPagu=sum(_rupFiltered,'Total Nilai (Rp)');
+  var rows_html=methods.map(function(m){
+    // Pagu dari RUP; Kontrak dari Realisasi
+    var realR=_realFiltered.filter(r=>m.kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
+    var rupR=_rupFiltered.filter(r=>m.kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
+    var pagu=sum(rupR,'Total Nilai (Rp)');
+    var kontrak=sum(realR,'Nilai Kontrak (Rp)')||sum(realR,'Nilai Kontrak')||sum(realR,'Total Nilai (Rp)');
+    var hps=sum(realR,'Nilai HPS (Rp)')||sum(realR,'Pagu HPS')||(pagu*0.98);
+    var efis=Math.max(pagu-kontrak,0);
+    var pctE=pagu?(efis/pagu*100):0;
+    return '<tr><td style="font-weight:600">'+m.label+'</td><td>'+fmt(pagu)+'</td><td>'+fmt(hps)+'</td><td>'+fmt(kontrak)+'</td><td style="color:#e65100;font-weight:700">'+fmt(efis)+'</td><td style="font-weight:700;color:'+(pctE>=10?'#2e7d32':pctE>=5?'#e65100':'#c62828')+'">'+pctE.toFixed(1)+'%</td></tr>';
+  }).join('');
+  var gTotal=sum(_rupFiltered,'Total Nilai (Rp)');
+  var gKontrak=sum(_realFiltered,'Nilai Kontrak (Rp)')||sum(_realFiltered,'Nilai Kontrak')||sum(_realFiltered,'Total Nilai (Rp)');
+  var gEfis=Math.max(gTotal-gKontrak,0);
+  return '<div class="modal-kpi-grid">'+
+    '<div class="modal-kpi"><div class="modal-kpi-label">Total Pagu</div><div class="modal-kpi-value">'+fmt(gTotal)+'</div></div>'+
+    '<div class="modal-kpi"><div class="modal-kpi-label">Total Kontrak</div><div class="modal-kpi-value">'+fmt(gKontrak)+'</div></div>'+
+    '<div class="modal-kpi"><div class="modal-kpi-label">Total Efisiensi</div><div class="modal-kpi-value" style="color:#e65100">'+fmt(gEfis)+'</div><div class="modal-kpi-sub">'+(gTotal?(gEfis/gTotal*100).toFixed(1):'0')+'% dari pagu</div></div>'+
+    '</div>'+
+    '<div class="modal-section-title">Efisiensi per Metode Pengadaan</div>'+
+    '<table class="modal-table"><thead><tr><th>Metode</th><th>Pagu</th><th>Pagu HPS</th><th>Nilai Kontrak</th><th>Efisiensi</th><th>%</th></tr></thead>'+
+    '<tbody>'+rows_html+'</tbody></table>';
+}
+
 function modalStatusDetail(prefix,kws){
   var rows=_realFiltered.filter(r=>kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
   var selesai=rows.filter(r=>{var s=(r['Status Paket']||'').toLowerCase();return s.includes('selesai')||s.includes('kontrak')||s.includes('terima');});
-  var pagu=sum(rows,'Total Nilai (Rp)'), kontrak=sum(rows,'Nilai Kontrak (Rp)')||sum(rows,'Nilai Kontrak')||(pagu*0.95);
+  var pagu=sum(rows,'Total Nilai (Rp)'), kontrak=sum(rows,'Nilai Kontrak (Rp)')||sum(rows,'Nilai Kontrak')||pagu;
   return modalKpiRow([{label:'Total Paket',value:rows.length.toLocaleString('id-ID')},{label:'Paket Selesai',value:selesai.length.toLocaleString('id-ID'),sub:(rows.length?(selesai.length/rows.length*100).toFixed(1)+'% selesai':'—')},{label:'Total Pagu',value:fmt(pagu)}])+'<div class="modal-section-title">Status Paket</div>'+countTableFromGroup(rows,'Status Paket')+'<div class="modal-section-title">Per Satuan Kerja</div>'+tableFromGroup(rows,'Nama Satuan Kerja');
 }
 
@@ -1018,12 +1176,14 @@ function modalChartSatker(){
 var presentState={currentSlide:0, totalSlides:4, autoplay:true, intervalSec:10, timer:null, progressTimer:null, progressStart:null};
 
 var slideDefinitions=[
-  {id:'slide-overview', title:'Ringkasan Pengadaan', subtitle:'Overview RUP & Realisasi Kota Surakarta', buildFn:buildSlideOverview},
-  {id:'slide-rup', title:'Rencana Umum Pengadaan', subtitle:'Distribusi metode, cara, dan jenis pengadaan', buildFn:buildSlideRUP},
-  {id:'slide-realisasi', title:'Realisasi Pengadaan', subtitle:'Capaian realisasi dan progress per metode', buildFn:buildSlideRealisasi},
-  {id:'slide-satker', title:'Top Satuan Kerja', subtitle:'Satker dengan nilai realisasi tertinggi', buildFn:buildSlideSatker},
-  {id:'slide-sumber', title:'Sumber Dana & Cara Pengadaan', subtitle:'Distribusi anggaran berdasarkan sumber pendanaan', buildFn:buildSlideSumberDana},
-  {id:'slide-status', title:'Status per Metode', subtitle:'Perbandingan pagu, realisasi, dan efisiensi', buildFn:buildSlideStatus},
+  {id:'slide-overview',   title:'Ringkasan Pengadaan',          subtitle:'Overview RUP & Realisasi Kota Surakarta',               buildFn:buildSlideOverview},
+  {id:'slide-rup',        title:'Rencana Umum Pengadaan',       subtitle:'Distribusi metode, cara, dan jenis pengadaan',           buildFn:buildSlideRUP},
+  {id:'slide-realisasi',  title:'Realisasi Pengadaan',          subtitle:'Capaian realisasi dan progress per metode',              buildFn:buildSlideRealisasi},
+  {id:'slide-detail',     title:'Detail per Metode',            subtitle:'Paket, Pagu, Kontrak, HPS & Efisiensi per metode',       buildFn:buildSlideRealisasiDetail},
+  {id:'slide-satker',     title:'Top Satuan Kerja',             subtitle:'Satker dengan nilai realisasi tertinggi',                buildFn:buildSlideSatker},
+  {id:'slide-sumber',     title:'Sumber Dana & Cara Pengadaan', subtitle:'Distribusi anggaran berdasarkan sumber pendanaan',       buildFn:buildSlideSumberDana},
+  {id:'slide-status',     title:'Status per Metode',            subtitle:'Perbandingan pagu, realisasi, dan efisiensi',            buildFn:buildSlideStatus},
+  {id:'slide-tanggal',    title:'Data per Tanggal',             subtitle:'Tren realisasi paket dan nilai kontrak per bulan',       buildFn:buildSlideTanggal},
 ];
 
 function openPresentSettings(){
@@ -1134,29 +1294,42 @@ function buildSlideRUP(){
 function buildSlideRealisasi(){
   var rupM=gSum(_rupFiltered,'Metode Pengadaan','Total Nilai (Rp)'), realM=gSum(_realFiltered,'Metode Pengadaan','Total Nilai (Rp)');
   var allM=[...new Set([...Object.keys(rupM),...Object.keys(realM)])];
-  var totalPDN=sum(_realFiltered,'Nilai PDN (Rp)'), totalReal=sum(_realFiltered,'Total Nilai (Rp)');
   var totalPagu=sum(_rupFiltered,'Total Nilai (Rp)');
-  var overallPct=totalPagu?(totalReal/totalPagu*100):0;
+  var totalKontrak=sum(_realFiltered,'Nilai Kontrak (Rp)')||sum(_realFiltered,'Nilai Kontrak')||sum(_realFiltered,'Total Nilai (Rp)');
+  var totalHPS=sum(_realFiltered,'Nilai HPS (Rp)')||sum(_realFiltered,'Pagu HPS')||(totalPagu*0.98);
+  var totalEfis=Math.max(totalPagu-totalKontrak,0);
+  var totalPkt=_realFiltered.length;
+  var sisaPkt=totalPkt-_realFiltered.filter(r=>{var s=(r['Status Paket']||'').toLowerCase();return s.includes('selesai')||s.includes('kontrak')||s.includes('terima');}).length;
+  var overallPct=totalPagu?(totalKontrak/totalPagu*100):0;
   var pctColor=overallPct>=80?'#2e7d32':overallPct>=50?'#e65100':'#c62828';
-  return slideHdr('Realisasi Pengadaan','Capaian per Metode — '+_realFiltered.length.toLocaleString('id-ID')+' paket terealisasi')+
+  return slideHdr('Realisasi Pengadaan','Capaian per Metode — '+totalPkt.toLocaleString('id-ID')+' paket | Sisa '+sisaPkt.toLocaleString('id-ID'))+
   '<div class="slide-row2">'+
   '<div class="slide-card"><div class="slide-card-title">Progress per Metode Pengadaan</div>'+
   allM.slice(0,7).map((m,i)=>{var p=rupM[m]||0,r=realM[m]||0,pct=p?(r/p*100):0;var c=pct>=80?'#2e7d32':pct>=50?'#e65100':'#c62828';return'<div class="slide-prog-item"><div class="slide-prog-label"><span style="font-size:11px">'+(m.length>24?m.substr(0,22)+'…':m)+'</span><span style="color:'+c+';font-weight:800">'+pct.toFixed(1)+'%</span></div><div class="slide-prog-bg"><div class="slide-prog-fill" style="width:'+Math.min(pct,100).toFixed(1)+'%;background:'+c+'"></div></div><div style="font-size:10px;color:#90a4ae;margin-top:2px">'+fmt(r)+' / Pagu '+fmt(p)+'</div></div>';}).join('')+
   '</div>'+
-  '<div style="display:flex;flex-direction:column;gap:14px">'+
+  '<div style="display:flex;flex-direction:column;gap:12px">'+
   '<div class="slide-card"><div class="slide-card-title">Ringkasan Capaian</div>'+
-  '<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;color:#546e7a;font-weight:600">Progress Keseluruhan</span><span style="font-size:14px;font-weight:800;color:'+pctColor+'">'+overallPct.toFixed(1)+'%</span></div><div style="background:#e8edf2;border-radius:8px;height:16px;overflow:hidden"><div style="width:'+Math.min(overallPct,100).toFixed(1)+'%;height:100%;background:linear-gradient(90deg,'+pctColor+','+pctColor+'aa);border-radius:8px"></div></div></div>'+
-  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
-  '<div style="background:#e8f5e9;border-radius:10px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:900;color:#2e7d32">'+fmt(totalReal)+'</div><div style="font-size:10px;color:#546e7a;margin-top:3px;font-weight:600;text-transform:uppercase">Total Realisasi</div></div>'+
-  '<div style="background:#e3f0ff;border-radius:10px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:900;color:#1565c0">'+fmt(totalPagu-totalReal)+'</div><div style="font-size:10px;color:#546e7a;margin-top:3px;font-weight:600;text-transform:uppercase">Sisa Pagu</div></div>'+
+  '<div style="margin-bottom:14px">'+
+    '<div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;color:#546e7a;font-weight:600">Realisasi Kontrak vs Pagu</span><span style="font-size:14px;font-weight:800;color:'+pctColor+'">'+overallPct.toFixed(1)+'%</span></div>'+
+    '<div style="background:#e8edf2;border-radius:8px;height:14px;overflow:hidden;display:flex">'+
+      '<div style="width:'+Math.min(overallPct,100).toFixed(1)+'%;background:'+pctColor+';border-radius:8px 0 0 8px"></div>'+
+      '<div style="width:'+Math.min(Math.max(totalPagu>0?totalEfis/totalPagu*100:0,0),100-overallPct).toFixed(1)+'%;background:#a5d6a7"></div>'+
+    '</div>'+
+    '<div style="display:flex;gap:10px;margin-top:4px;font-size:9px;color:#78909c">'+
+      '<span>■ Kontrak</span><span style="color:#a5d6a7">■ Efisiensi</span>'+
+    '</div>'+
+  '</div>'+
+  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+    '<div style="background:#e3f0ff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:13px;font-weight:900;color:#1565c0">'+fmt(totalPagu)+'</div><div style="font-size:9px;color:#546e7a;font-weight:600;text-transform:uppercase;margin-top:2px">Pagu Anggaran</div></div>'+
+    '<div style="background:#e8f5e9;border-radius:8px;padding:10px;text-align:center"><div style="font-size:13px;font-weight:900;color:#2e7d32">'+fmt(totalKontrak)+'</div><div style="font-size:9px;color:#546e7a;font-weight:600;text-transform:uppercase;margin-top:2px">Realisasi Kontrak</div></div>'+
+    '<div style="background:#fff3e0;border-radius:8px;padding:10px;text-align:center"><div style="font-size:13px;font-weight:900;color:#e65100">'+fmt(totalEfis)+'</div><div style="font-size:9px;color:#546e7a;font-weight:600;text-transform:uppercase;margin-top:2px">Efisiensi</div></div>'+
+    '<div style="background:#f3e5f5;border-radius:8px;padding:10px;text-align:center"><div style="font-size:13px;font-weight:900;color:#6a1b9a">'+fmt(totalHPS)+'</div><div style="font-size:9px;color:#546e7a;font-weight:600;text-transform:uppercase;margin-top:2px">Pagu HPS</div></div>'+
   '</div></div>'+
-  '<div class="slide-card"><div class="slide-card-title">Nilai PDN</div>'+
-  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
-  '<div style="text-align:center;padding:10px 0"><div class="slide-stat-big" style="color:#2e7d32;font-size:20px">'+fmt(totalPDN)+'</div><div class="slide-stat-label">Nilai PDN</div></div>'+
-  '<div style="text-align:center;padding:10px 0"><div class="slide-stat-big" style="color:#1565c0;font-size:28px">'+(totalReal?(totalPDN/totalReal*100).toFixed(1):'0')+'%</div><div class="slide-stat-label">% dari Realisasi</div></div>'+
-  '</div>'+
-  '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #e8edf2"><div style="background:#e8edf2;border-radius:6px;height:10px;overflow:hidden"><div style="width:'+(totalReal?(Math.min(totalPDN/totalReal*100,100)):0).toFixed(1)+'%;height:100%;background:linear-gradient(90deg,#2e7d32,#66bb6a);border-radius:6px"></div></div></div>'+
-  '</div>'+
+  '<div class="slide-card"><div class="slide-card-title">Paket</div>'+
+  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+    '<div style="text-align:center;background:#e3f0ff;border-radius:8px;padding:12px"><div style="font-size:28px;font-weight:900;color:#1565c0">'+totalPkt.toLocaleString("id-ID")+'</div><div style="font-size:9px;color:#546e7a;font-weight:600;text-transform:uppercase;margin-top:3px">Total Paket</div></div>'+
+    '<div style="text-align:center;background:#fff3e0;border-radius:8px;padding:12px"><div style="font-size:28px;font-weight:900;color:#e65100">'+sisaPkt.toLocaleString("id-ID")+'</div><div style="font-size:9px;color:#546e7a;font-weight:600;text-transform:uppercase;margin-top:3px">Sisa Paket</div></div>'+
+  '</div></div>'+
   '</div>'+
   '</div>';
 }
@@ -1219,6 +1392,201 @@ function buildSlideStatus(){
   '<tr><td style="color:#546e7a">Efisiensi</td><td style="font-weight:800;text-align:right;color:#2e7d32">'+eff(row.rup,row.real)+'</td></tr>'+
   '</tbody></table>'+
   '</div>').join('')+
+  '</div>';
+}
+
+
+function buildSlideRealisasiDetail(){
+  // Per-metode detail: Jumlah Paket, Sisa, Pagu, Kontrak, HPS, Efisiensi
+  var methods=[
+    {label:'E-Purchasing',   kws:['e-purch','epurch','purchasing'], color:'#6a1b9a', bg:'#f3e5f5'},
+    {label:'Pengadaan Langsung', kws:['langsung'],                  color:'#2e7d32', bg:'#e8f5e9'},
+    {label:'Tender / Seleksi',   kws:['tender','seleksi'],          color:'#1565c0', bg:'#e3f0ff'},
+  ];
+  var totalPagu=sum(_rupFiltered,'Total Nilai (Rp)');
+  var totalKontrak=0, totalHPS=0, totalEfis=0, totalPkt=0, totalSisa=0;
+  var rows_html=methods.map(function(m){
+    var realM=_realFiltered.filter(r=>m.kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
+    var rupM=_rupFiltered.filter(r=>m.kws.some(k=>(r['Metode Pengadaan']||'').toLowerCase().includes(k)));
+    // Total paket & pagu dari RUP
+    var totalRUPM=rupM.length;
+    var pagu=sum(rupM,'Total Nilai (Rp)');
+    // Paket selesai dari realisasi
+    var selesai=realM.filter(r=>{var s=(r['Status Paket']||'').toLowerCase();return s.includes('selesai')||s.includes('kontrak')||s.includes('terima')||s.includes('done');}).length;
+    var berjalan=realM.length-selesai;
+    // Sisa = RUP − masuk realisasi
+    var sisa=Math.max(totalRUPM-realM.length,0);
+    // Kontrak dari realisasi
+    var kontrak=sum(realM,'Nilai Kontrak (Rp)')||sum(realM,'Nilai Kontrak')||sum(realM,'Total Nilai (Rp)');
+    var hps=sum(realM,'Nilai HPS (Rp)')||sum(realM,'Pagu HPS')||(pagu*0.98);
+    // Efisiensi = Pagu RUP − Realisasi Kontrak
+    var efis=Math.max(pagu-kontrak,0);
+    var pctK=pagu?(kontrak/pagu*100):0;
+    var pctE=pagu?(efis/pagu*100):0;
+    totalKontrak+=kontrak; totalHPS+=hps; totalEfis+=efis;
+    totalPkt+=totalRUPM; totalSisa+=sisa;
+    var real=realM; // alias for template below
+    return '<div class="slide-card" style="border-left:4px solid '+m.color+'">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">'+
+        '<div class="slide-card-title" style="margin-bottom:0">'+m.label+'</div>'+
+        '<span style="background:'+m.bg+';color:'+m.color+';font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px">'+totalRUPM.toLocaleString('id-ID')+' paket RUP</span>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px">'+
+        '<div style="background:#f8fafc;border-radius:8px;padding:8px;text-align:center"><div style="font-size:16px;font-weight:900;color:'+m.color+'">'+selesai.toLocaleString('id-ID')+'</div><div style="font-size:9px;color:#78909c;font-weight:600;text-transform:uppercase;margin-top:2px">Selesai</div></div>'+
+        '<div style="background:#fff3e0;border-radius:8px;padding:8px;text-align:center"><div style="font-size:16px;font-weight:900;color:#e65100">'+berjalan.toLocaleString('id-ID')+'</div><div style="font-size:9px;color:#78909c;font-weight:600;text-transform:uppercase;margin-top:2px">Berjalan</div></div>'+
+        '<div style="background:#ffebee;border-radius:8px;padding:8px;text-align:center"><div style="font-size:16px;font-weight:900;color:#c62828">'+sisa.toLocaleString('id-ID')+'</div><div style="font-size:9px;color:#78909c;font-weight:600;text-transform:uppercase;margin-top:2px">Sisa RUP</div></div>'+
+        '<div style="background:#e8f5e9;border-radius:8px;padding:8px;text-align:center"><div style="font-size:14px;font-weight:900;color:#2e7d32">'+pctK.toFixed(1)+'%</div><div style="font-size:9px;color:#78909c;font-weight:600;text-transform:uppercase;margin-top:2px">Capaian</div></div>'+
+      '</div>'+
+      '<table class="slide-table" style="font-size:11px">'+
+        '<tbody>'+
+          '<tr><td style="color:#546e7a">Pagu Anggaran</td><td style="font-weight:700;text-align:right;color:#1565c0">'+fmt(pagu)+'</td></tr>'+
+          '<tr><td style="color:#546e7a">Pagu HPS</td><td style="font-weight:700;text-align:right;color:#546e7a">'+fmt(hps)+'</td></tr>'+
+          '<tr><td style="color:#546e7a">Realisasi Kontrak</td><td style="font-weight:700;text-align:right;color:#2e7d32">'+fmt(kontrak)+'</td></tr>'+
+          '<tr><td style="color:#546e7a">Efisiensi</td><td style="font-weight:700;text-align:right;color:#e65100">'+fmt(efis)+' ('+pctE.toFixed(1)+'%)</td></tr>'+
+        '</tbody>'+
+      '</table>'+
+      '<div style="margin-top:10px">'+
+        '<div style="background:#e8edf2;border-radius:6px;height:10px;overflow:hidden;display:flex">'+
+          '<div style="width:'+Math.min(pctK,100).toFixed(1)+'%;background:'+m.color+';border-radius:6px 0 0 6px"></div>'+
+          '<div style="width:'+Math.min(pctE,100-pctK).toFixed(1)+'%;background:#a5d6a7"></div>'+
+        '</div>'+
+        '<div style="display:flex;gap:12px;margin-top:4px;font-size:9px;color:#78909c">'+
+          '<span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:'+m.color+';display:inline-block"></span>Realisasi</span>'+
+          '<span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#a5d6a7;display:inline-block"></span>Efisiensi HPS</span>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  return slideHdr('Detail Realisasi per Metode','Paket, Pagu, Kontrak, HPS & Efisiensi — Total '+totalPkt.toLocaleString('id-ID')+' paket')+
+  '<div class="slide-row3">'+rows_html+'</div>';
+}
+
+function buildSlideTanggal(){
+  // Group realisasi by date column (rightmost date column)
+  // Try common date column names
+  var dateKeys=['Tanggal SPMK','Tanggal Kontrak','Tanggal Selesai','Tanggal Input','Tanggal Mulai','Tgl Kontrak','Tgl SPMK'];
+  var dateKey='';
+  if(_realFiltered.length>0){
+    var firstRow=_realFiltered[0];
+    for(var k of dateKeys){ if(firstRow[k]!==undefined){dateKey=k;break;} }
+    // Fallback: find any key with 'tanggal' or 'tgl' case-insensitive
+    if(!dateKey){
+      var keys=Object.keys(firstRow);
+      dateKey=keys.find(k=>k.toLowerCase().includes('tanggal')||k.toLowerCase().includes('tgl'))||'';
+    }
+    // Last resort: use last column
+    if(!dateKey){
+      var keys=Object.keys(firstRow);
+      dateKey=keys[keys.length-1]||'';
+    }
+  }
+
+  // Parse dates and group by month
+  function parseDate(v){
+    if(!v||v==='') return null;
+    // Try Excel serial number
+    var n=parseFloat(v);
+    if(!isNaN(n)&&n>40000&&n<50000){
+      var d=new Date((n-25569)*86400000);
+      return isNaN(d)?null:d;
+    }
+    // Try string date
+    var d=new Date(v);
+    return isNaN(d)?null:d;
+  }
+
+  var monthly={};
+  var monthlyPagu={};
+  var monthlyKontrak={};
+  _realFiltered.forEach(function(r){
+    var d=parseDate(r[dateKey]);
+    if(!d) return;
+    var key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    monthly[key]=(monthly[key]||0)+1;
+    monthlyKontrak[key]=(monthlyKontrak[key]||0)+(parseFloat(r['Total Nilai (Rp)'])||0);
+  });
+  var rupMonthly={};
+  _rupFiltered.forEach(function(r){
+    var d=parseDate(r[dateKey])||parseDate(r['Tanggal Input'])||parseDate(r['Tgl Input']);
+    if(!d) return;
+    var key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    rupMonthly[key]=(rupMonthly[key]||0)+(parseFloat(r['Total Nilai (Rp)'])||0);
+  });
+
+  var months=Object.keys(monthly).sort();
+  var hasData=months.length>0;
+
+  // Cumulative realisasi
+  var cumKontrak=0;
+  var cumulativeRows=months.map(function(k){
+    cumKontrak+=monthlyKontrak[k]||0;
+    var pkt=monthly[k]||0;
+    return{month:k, paket:pkt, kontrak:monthlyKontrak[k]||0, cumKontrak:cumKontrak};
+  });
+
+  // Top 5 recent activity
+  var recentTop=Object.entries(monthly).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,8);
+
+  var monthLabel=function(k){
+    var parts=k.split('-');
+    var names=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+    return names[parseInt(parts[1])-1]+" '"+parts[0].slice(2);
+  };
+
+  var maxPkt=Math.max(...months.map(k=>monthly[k]),1);
+  var maxKontrak=Math.max(...months.map(k=>monthlyKontrak[k]||0),1);
+  var totalPkt=Object.values(monthly).reduce((a,b)=>a+b,0);
+  var totalVal=Object.values(monthlyKontrak).reduce((a,b)=>a+b,0);
+
+  if(!hasData){
+    return slideHdr('Data Realisasi per Tanggal','Kolom tanggal: '+(dateKey||'—'))+
+      '<div class="slide-card" style="text-align:center;padding:40px"><div style="font-size:32px">📅</div><div style="font-size:14px;color:#546e7a;margin-top:12px">Data tanggal belum tersedia atau kolom tidak terdeteksi.</div><div style="font-size:11px;color:#90a4ae;margin-top:6px">Periksa nama kolom tanggal pada spreadsheet.</div></div>';
+  }
+
+  return slideHdr('Realisasi per Tanggal','Berdasarkan kolom: '+dateKey+' — '+totalPkt.toLocaleString('id-ID')+' paket, '+fmt(totalVal))+
+  '<div class="slide-row2">'+
+  '<div class="slide-card"><div class="slide-card-title">Jumlah Paket per Bulan</div>'+
+  months.slice(-10).map(function(k){
+    var v=monthly[k]||0;
+    var pct=maxPkt?(v/maxPkt*100):0;
+    return '<div class="slide-prog-item"><div class="slide-prog-label">'+
+      '<span style="font-size:11px">'+monthLabel(k)+'</span>'+
+      '<span style="font-weight:800;color:#1565c0">'+v.toLocaleString('id-ID')+' paket</span>'+
+    '</div>'+
+    '<div class="slide-prog-bg"><div class="slide-prog-fill" style="width:'+pct.toFixed(1)+'%;background:#1565c0"></div></div>'+
+    '</div>';
+  }).join('')+
+  '</div>'+
+  '<div class="slide-card"><div class="slide-card-title">Nilai Kontrak per Bulan (Rp M)</div>'+
+  months.slice(-10).map(function(k){
+    var v=monthlyKontrak[k]||0;
+    var pct=maxKontrak?(v/maxKontrak*100):0;
+    var vM=(v/1e9).toFixed(1);
+    return '<div class="slide-prog-item"><div class="slide-prog-label">'+
+      '<span style="font-size:11px">'+monthLabel(k)+'</span>'+
+      '<span style="font-weight:800;color:#2e7d32">'+vM+'M</span>'+
+    '</div>'+
+    '<div class="slide-prog-bg"><div class="slide-prog-fill" style="width:'+pct.toFixed(1)+'%;background:#2e7d32"></div></div>'+
+    '</div>';
+  }).join('')+
+  '</div>'+
+  '</div>'+
+  '<div class="slide-card" style="margin-top:0"><div class="slide-card-title">Akumulasi Realisasi Kumulatif</div>'+
+  '<div style="display:grid;grid-template-columns:repeat('+Math.min(cumulativeRows.length,5)+',1fr);gap:8px">'+
+  cumulativeRows.slice(-5).map(function(r,i){
+    var totalTarget=sum(_rupFiltered,'Total Nilai (Rp)');
+    var pct=totalTarget?(r.cumKontrak/totalTarget*100):0;
+    var c=pct>=80?'#2e7d32':pct>=50?'#e65100':'#1565c0';
+    return '<div style="background:#f8fafc;border-radius:10px;padding:12px;text-align:center">'+
+      '<div style="font-size:11px;font-weight:700;color:#546e7a;margin-bottom:6px">'+monthLabel(r.month)+'</div>'+
+      '<div style="font-size:15px;font-weight:900;color:'+c+'">'+pct.toFixed(1)+'%</div>'+
+      '<div style="font-size:9px;color:#90a4ae;margin-top:2px">'+fmt(r.cumKontrak)+'</div>'+
+      '<div style="background:#e8edf2;border-radius:4px;height:6px;overflow:hidden;margin-top:6px">'+
+        '<div style="width:'+Math.min(pct,100).toFixed(1)+'%;height:100%;background:'+c+'"></div>'+
+      '</div>'+
+    '</div>';
+  }).join('')+
+  '</div>'+
   '</div>';
 }
 
